@@ -109,6 +109,7 @@ explore: app_events {
     relationship: one_to_many
   }
 
+  # optional join - only if you want to look at daily, weekly, monthly active users
   join: use_rolling_30_day_window {
     view_label: "Daily, Weekly, Monthly Active Users"
     type: left_outer
