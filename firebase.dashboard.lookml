@@ -4,7 +4,7 @@
   elements:
   - name: Weekly Retention
     title: Weekly Retention
-    model: astro
+    model: firebase
     explore: app_events
     type: looker_line
     fields:
@@ -66,7 +66,7 @@
     height: 5
   - name: Retention Cohorts
     title: Retention Cohorts
-    model: astro
+    model: firebase
     explore: app_events
     type: table
     fields:
@@ -198,7 +198,7 @@
     height: 10
   - name: Devices
     title: Devices
-    model: astro
+    model: firebase
     explore: app_events
     type: looker_bar
     fields:
@@ -264,7 +264,7 @@
     height: 4
   - name: Users Last Week
     title: Users Last Week
-    model: astro
+    model: firebase
     explore: app_events
     type: single_value
     fields:
@@ -331,7 +331,7 @@
     height: 4
   - name: Devices Last Week
     title: Devices Last Week
-    model: astro
+    model: firebase
     explore: app_events
     type: single_value
     fields:
