@@ -1,3 +1,5 @@
+### Replace connection parameter with your database connection name
+
 connection: "production-bq"
 
 include: "*.view.lkml"         # include all views in this project
