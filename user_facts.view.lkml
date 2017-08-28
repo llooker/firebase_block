@@ -13,7 +13,7 @@ view: user_facts {
 
         SELECT
             app_events.*,
-            'macOS' as platform,
+            'Android' as platform,
             TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'\d\d\d\d\d\d\d\d'))) AS _DATA_DATE
           FROM `bigquery-connectors.firebase_android.app_events_*` as app_events
         )
