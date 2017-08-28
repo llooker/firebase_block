@@ -11,35 +11,24 @@
 view: app_events {
 # if there is only one schema, unions can be removed from derived table
   derived_table: {
-    sql: 
+    sql:
         -- all data from iOS dataset
         SELECT
             app_events.*,
             'iOS' as platform,
             TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'\d\d\d\d\d\d\d\d'))) AS _DATA_DATE
-         FROM `appname_IOS.app_events_*` as app_events
+         FROM `bigquery-connectors.firebase.app_events_*` as app_events
         -- add templated filter to reduce dataset to specified date partitions
         WHERE {% condition app_events.date_range%} TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'\d\d\d\d\d\d\d\d'))) {% endcondition %}
 
          UNION ALL
-
-        -- union all data from MacOS dataset
-         SELECT
-            app_events.*,
-            'macOS' as platform,
-            TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'\d\d\d\d\d\d\d\d'))) AS _DATA_DATE
-         FROM `appname_MACOS.app_events_*` as app_events
-        -- add templated filter to reduce dataset to specified date partitions
-         WHERE {% condition app_events.date_range%} TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'\d\d\d\d\d\d\d\d'))) {% endcondition %}
-
-        UNION ALL
 
         -- union all data from Android dataset
          SELECT
             app_events.*,
             'Android' as platform,
             TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'\d\d\d\d\d\d\d\d'))) AS _DATA_DATE
-         FROM `appname_ANDROID.app_events_*` as app_events
+         FROM `bigquery-connectors.firebase_android.app_events_*` as app_events
         -- add templated filter to reduce dataset to specified date partitions
          WHERE {% condition app_events.date_range%} TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'\d\d\d\d\d\d\d\d'))) {% endcondition %}
         ;;

@@ -7,7 +7,7 @@ view: user_facts {
             app_events.*,
             'iOS' as platform,
             TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'\d\d\d\d\d\d\d\d'))) AS _DATA_DATE
-          FROM `appname_IOS.app_events_*` as app_events
+          FROM `bigquery-connectors.firebase.app_events_*` as app_events
 
         UNION ALL
 
@@ -15,15 +15,7 @@ view: user_facts {
             app_events.*,
             'macOS' as platform,
             TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'\d\d\d\d\d\d\d\d'))) AS _DATA_DATE
-          FROM `appname_MACOS.app_events_*` as app_events
-
-        UNION ALL
-
-        SELECT
-            app_events.*,
-            'Android' as platform,
-            TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'\d\d\d\d\d\d\d\d'))) AS _DATA_DATE
-          FROM `appname_ANDROID.app_events_*` as app_events
+          FROM `bigquery-connectors.firebase_android.app_events_*` as app_events
         )
 SELECT
   app_events__user_dim.user_id  AS app_events__user_dim_user_id,
@@ -35,7 +27,7 @@ LEFT JOIN UNNEST([app_events.user_dim]) as app_events__user_dim
 
 GROUP BY 1
 ;;
-sql_trigger_value: SELECT CURRENT_DATE ;;
+# sql_trigger_value: SELECT CURRENT_DATE ;;
   }
 
 

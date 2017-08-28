@@ -1,6 +1,6 @@
 ### Replace connection parameter with your database connection name
 
-connection: "production-bq"
+connection: "firebase_blocks"
 
 include: "*.view.lkml"         # include all views in this project
 include: "*.dashboard.lookml"  # include all dashboards in this project
