@@ -13,7 +13,7 @@ explore: app_events {
   always_filter: {
     filters: {
       field: date_range
-      value: "1 days"
+      value: "90 days"
     }
   }
 
